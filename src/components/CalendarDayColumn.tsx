@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { Dayjs } from "dayjs";
 import _ from "lodash";
 import { SLOT_NUMBER } from "./Calendar";
+import Slot from "./Slot";
 
 type CalendarDayColumnProps = {
   date: Dayjs;
@@ -32,14 +33,9 @@ function CalendarDayColumn({ date }: CalendarDayColumnProps) {
       </p>
       <div className={"flex flex-col gap-2 mt-2"}>
         {slots.map((slot) => (
-          <button
-            className={
-              "bg-gray-100 hover:bg-black hover:text-white rounded-lg text-center py-2 text-black"
-            }
-            key={slot.start.unix().toString()}
-          >
+          <Slot key={slot.start.unix().toString()}>
             {slot.start.format("HH:mm")}
-          </button>
+          </Slot>
         ))}
       </div>
     </div>
