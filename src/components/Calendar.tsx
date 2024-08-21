@@ -1,6 +1,7 @@
 import React, { useCallback, useMemo, useState } from "react";
 import dayjs from "dayjs";
 import _ from "lodash";
+import CalendarDayColumn from "./CalendarDayColumn";
 import Icons from "./Icons";
 import "dayjs/locale/fr";
 
@@ -31,26 +32,22 @@ function Calendar() {
   const prevDisabled = useMemo(() => page === 1, [page]);
 
   return (
-    <div className={"grid grid-cols-[auto_1fr_auto] gap-4 max-w-6xl"}>
+    <div
+      className={"grid grid-cols-[auto_1fr_auto] gap-4 max-w-6xl items-start"}
+    >
       <button
         onClick={prev}
         disabled={prevDisabled}
-        className={"disabled:opacity-50"}
+        className={"disabled:opacity-50 my-3"}
       >
         <Icons.ChevronLeft width={28} />
       </button>
       <div className={"grid grid-cols-7 gap-4"}>
-        {dates.map((date) => (
-          <div key={date.unix().toString()}>
-            <p className={"text-center"}>
-              <span>{date.format("ddd")}</span>
-              <br />
-              <span className={"font-bold"}>{date.format("D MMM")}</span>
-            </p>
-          </div>
+        {dates.map((date, index) => (
+          <CalendarDayColumn key={index} date={date} />
         ))}
       </div>
-      <button onClick={next}>
+      <button onClick={next} className={"my-3"}>
         <Icons.ChevronRight width={28} />
       </button>
     </div>
